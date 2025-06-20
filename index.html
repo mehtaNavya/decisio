@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>AI-Powered Decision Maker</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Luckiest+Guy&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="/static/style.css">
+
+</head>
+
+
+<body class="box2">
+  <div class="container">
+    <form id="decision-form">
+      <label>Options (comma-separated):</label>
+      <input type="text" id="options" required placeholder="e.g. Python, JavaScript">
+
+      <label>Decision criteria (comma-separated):</label>
+      <input type="text" id="criteria" required placeholder="e.g. Learning curve, Job scope">
+
+      <button class="analyze_button" type="submit">Analyze</button>
+    </form>
+
+    <div id="result" class="results-grid">Your analysis will appear here...</div>
+
+    <!-- Final Decision Modal -->
+    <div id="decisionModal" class="modal">
+      <div class="modal-content animate">
+        <span class="close-button" id="closeModal">&times;</span>
+        <h2 id="modal-title">Final Decision</h2>
+        <p id="modal-body">...</p>
+      </div>
+    </div>
+  </div>
+
+  <script id="calc_loading">
+    const form = document.getElementById("decision-form");
+    const resultBox = document.getElementById("result");
+
+    form.addEventListener("submit", async function(e) {
+      e.preventDefault();
+      const options = document.getElementById("options").value.split(',').map(x => x.trim());
+      const criteria = document.getElementById("criteria").value.split(',').map(x => x.trim());
+
+      resultBox.innerHTML = "<p> Analyzing... please wait.</p>";
+
+      const response = await fetch("/analyze", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ options, criteria })
+      });
+
+      const data = await response.json();
+
+      if (data.result_json) {
+        resultBox.innerHTML = "";
+        const parsed = JSON.parse(data.result_json);
+        const scores = data.scores;
+        const best = data.best_option;
+
+        for (let option in parsed) {
+          const card = document.createElement("div");
+          card.className = "option-card animate";
+          card.innerHTML = `
+            <h3 class="highlight-heading">${option}</h3>
+            <div class="columns">
+              <div><h4>✅ Pros</h4><ul>${parsed[option].pros.map(p => `<li>${p}</li>`).join("")}</ul></div>
+              <div><h4>❌ Cons</h4><ul>${parsed[option].cons.map(c => `<li>${c}</li>`).join("")}</ul></div>
+            </div>
+            <p>📊 Score: ${scores[option]}</p>
+          `;
+          resultBox.appendChild(card);
+        }
+
+        const modal = document.getElementById("decisionModal");
+        const modalBody = document.getElementById("modal-body");
+        modalBody.innerHTML = `<p class="highlight-modal"> Based on your input, the best option is:   ${best}   </p>`;
+        modal.style.display = "block";
+
+        document.getElementById("closeModal").onclick = () => modal.style.display = "none";
+        window.onclick = (event) => { if (event.target === modal) modal.style.display = "none"; }
+      } else {
+        resultBox.textContent = "Error: " + data.error;
+      }
+    });
+  </script>
+
+
+</body>
+</html>

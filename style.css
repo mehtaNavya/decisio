@@ -1,0 +1,264 @@
+/* General reset and font */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Noticia Text', serif;
+    background-color: #f4f4f4;
+}
+
+/* Landing Page (cover.html) */
+.box1 {
+    background-color: #4b3832;
+    color: #fdf5c9;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    
+}
+
+.appname1 {
+    font-family: "Luckiest Guy", cursive;
+    font-size: 200px;
+    color: #eae374;
+    text-shadow: #4b3832;
+    margin: 0;
+    font-weight: normal;
+    animation: fadeIn 3.5s ease-in;
+}
+
+.appname2 {
+    font-family: "Luckiest Guy", cursive;
+    font-size: 30px;
+    margin-top: -20px;
+    text-shadow: #4b3832;
+    color: #fffdd0;
+    font-weight: normal;
+    animation:fadeIn 1.5s ease-in;
+}
+
+.start-button, .gobutton {
+    margin-top: 30px;
+    font-family: "Luckiest Guy", cursive;
+    padding: 14px 45px;
+    font-size: 50px;
+    background-color: #ffbb33;
+    border: none;
+    border-radius: 8px;
+    text-decoration: none;
+    color: #4b3832 ;
+    font-weight: normal;
+    transition: transform 0.2s ease, background-color 0.3s;
+    animation-fill-mode: fadeInUp 1.0s ease-in-out;
+}
+
+.start-button:hover, .gobutton:hover {
+    transform: scale(1.1);
+    background-color: #ffd966;
+}
+
+/* Main Page (index.html) */
+.box2 {
+    background-color: #4b3832;
+    min-height: 100vh;
+    padding: 40px;
+}
+
+.container {
+    max-width: 800px;
+    margin: auto;
+    background: #4b3832;
+    padding : 30px;
+    padding-bottom: 180px;
+    padding-right: 60px;
+    border-radius: 12px;
+    
+    animation: fadeInUp 0.7s ease-in-out;
+}
+
+label {
+    font-weight: bold;
+    display: block;
+    margin-top: 20px;
+    font-weight: normal;
+    position: relative;
+    top: 60px;
+    font-family: "Luckiest Guy", cursive;
+    font-size: 20px;
+    color: #fffdd0;
+}
+
+input[type="text"] {
+    width: 100%;
+    padding: 12px;
+    position: relative;
+    top: 70px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 16px;
+    background: #eae374;
+}
+
+.analyze_button {
+    font-family: "Luckiest Guy", cursive;
+    
+
+    margin-top: 25px;
+    padding: 12px 24px;
+    background-color: #fc913a;
+    color: #2e1e1a ; 
+    position: relative;
+    left: 300px;
+    top: 90px;
+    border: none;
+    border-radius: 8px;
+    font-size: 45px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.analyze_button:hover {
+    color:#f2ae72;;
+}
+
+
+.results-grid {
+    margin-top: 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    position: relative;
+    top: 110px;
+    font-family: "Luckiest Guy", cursive;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: lighter;
+    color: #fdf5c9;
+}
+
+/* Animated Option Cards */
+.option-card {
+    background-color: #4b3832;
+    position: relative;
+    top: 30px;
+    box-shadow: none;
+    left: 18px;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    animation: fadeInCard 2.5s ease-in;
+}
+
+.highlight-heading {
+  font-family: 'Luckiest Guy', cursive;
+  font-size: 40px;
+  font-weight: normal;
+  color: #eae374;
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Luckiest+Guy&display=swap');
+
+.highlight-modal {
+  font-family: 'Luckiest Guy', cursive;
+  font-size: 30px; 
+  color: #97ebdb;
+  font-style: normal;
+  font-weight: 20px;
+  text-align: center;
+  margin: 20px 0;
+  font-weight: normal;
+}
+
+#modal-title{
+
+    font-family: 'Luckiest Guy', cursive;
+    font-size: 30px; 
+    color: #4b3832;
+
+}
+
+
+
+
+
+.columns {   /* pros cons box */
+    display: flex;
+    justify-content: space-between;
+    gap: 60px;
+    font-size: 20px;
+    text-shadow: none;
+    color: #e2f4c7;
+    font-style: normal;
+    font-weight: 0;
+}
+
+.columns > div {
+    flex: 1;
+}
+
+.columns ul {
+    padding-left: 20px;
+}
+
+.columns li {
+    margin-bottom: 8px;
+}
+
+/* Modal Popup */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 10;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.5);
+}
+
+.modal-content {
+    background-color: #fc913a;
+    margin: 10% auto;
+    padding: 30px;
+    
+    width: 60%;
+    border-radius: 12px;
+    text-align: center;
+    animation: slideDown 0.5s ease-in-out;
+}
+
+.close-button {
+    color: #333;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.close-button:hover {
+    color: red;
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from { opacity: 0; transform: scale(0.95); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideDown {
+    from { top: -300px; opacity: 0; }
+    to { top: 0; opacity: 1; }
+}
+
+@keyframes fadeInCard {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
